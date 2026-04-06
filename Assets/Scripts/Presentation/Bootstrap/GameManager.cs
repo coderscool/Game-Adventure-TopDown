@@ -33,15 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(LoadSceneRoutine(Player.Instance));
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            LoadScene();
-        }
+        StartCoroutine(LoadItemScene());
     }
 
     private void OnEnable()
@@ -89,12 +81,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator AfterSceneLoaded()
     {
-        // Load player data
-        yield return gameLoadService.TryRestoreFromSave();
-
-        yield return null;
-
-        // Restore object trong scene
         LoadSceneState(SceneManager.GetActiveScene().name);
 
         yield return new WaitForSeconds(0.1f);
@@ -112,6 +98,13 @@ public class GameManager : MonoBehaviour
             player.currentMapId,
             AfterSceneLoaded
         );
+    }
+
+    IEnumerator LoadItemScene() 
+    {
+        yield return gameLoadService.TryRestoreFromSave();
+
+        yield return null;
     }
 
     public void SaveGame()

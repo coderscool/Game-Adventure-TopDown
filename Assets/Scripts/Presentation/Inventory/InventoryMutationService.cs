@@ -15,7 +15,10 @@ public sealed class InventoryMutationService
             return;
 
         addAmount = FillExistingStacks(slots, data, addAmount);
-        addAmount = FillEmptySlots(slots, data, addAmount);
+        if (addAmount > 0)
+        {
+            addAmount = FillEmptySlots(slots, data, addAmount);
+        }
 
         if (addAmount > 0)
             Debug.Log("Inventory full");

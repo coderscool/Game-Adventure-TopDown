@@ -53,7 +53,7 @@ public class ItemPickup : SaveableBehaviour
 
         gameObject.SetActive(false);
 
-        //InventoryController.Instance.AddItem(itemData, 1);
+        InventoryController.Instance.AddItem(itemData, 1);
 
         GameManager.Instance.SaveSceneState(gameObject.scene.name);
 

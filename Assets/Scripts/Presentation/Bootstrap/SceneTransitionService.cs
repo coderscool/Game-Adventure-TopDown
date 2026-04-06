@@ -48,6 +48,9 @@ public sealed class SceneTransitionService
             yield return onSceneLoaded();
         }
 
-        LoadingUI.Instance.Hide();
+        if (LoadingUI.Instance != null)
+        {
+            LoadingUI.Instance.Hide();
+        }
     }
 }

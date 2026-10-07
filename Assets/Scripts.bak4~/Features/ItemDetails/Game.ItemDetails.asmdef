@@ -1,0 +1,21 @@
+{
+    "name": "Game.ItemDetails",
+    "rootNamespace": "",
+    "references": [
+        "Game.Character",
+        "Game.Inventory",
+        "Game.Items",
+        "Game.Shared",
+        "Game.World",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

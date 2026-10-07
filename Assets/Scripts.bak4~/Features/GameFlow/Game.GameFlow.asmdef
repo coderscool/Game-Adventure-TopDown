@@ -1,0 +1,21 @@
+{
+    "name": "Game.GameFlow",
+    "rootNamespace": "",
+    "references": [
+        "Game.Character",
+        "Game.Inventory",
+        "Game.Items",
+        "Game.Save",
+        "Cinemachine",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

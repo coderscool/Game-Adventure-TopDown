@@ -33,10 +33,13 @@ namespace Game.Features.World
             // Chờ 1 frame để object của scene mới khởi tạo xong.
             yield return null;
 
+            if (Player.Instance != null)
+                Player.Instance.CurrentMapId = sceneName;
+
             MovePlayerToSpawn(spawnId);
         }
 
-        private static void MovePlayerToSpawn(string spawnId)
+        public static void MovePlayerToSpawn(string spawnId)
         {
             Player player = Player.Instance;
             if (player == null)
@@ -45,7 +48,7 @@ namespace Game.Features.World
                 return;
             }
 
-            SpawnPoint[] spawns = FindObjectsOfType<SpawnPoint>();
+            SpawnPoint[] spawns = FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None);
             if (spawns.Length == 0)
             {
                 Debug.LogError("Không có SpawnPoint trong scene");

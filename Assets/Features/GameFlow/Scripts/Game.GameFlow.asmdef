@@ -6,6 +6,7 @@
         "Game.Inventory",
         "Game.Items",
         "Game.Save",
+        "Game.World",
         "Cinemachine",
         "UnityEngine.UI"
     ],

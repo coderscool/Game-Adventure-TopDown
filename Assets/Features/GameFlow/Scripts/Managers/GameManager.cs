@@ -6,6 +6,7 @@ using Game.Features.Inventory;
 using Game.Features.Save;
 using Game.Features.Save.Interfaces;
 using Game.Features.Save.Services;
+using Game.Features.World;
 
 namespace Game.Features.GameFlow.Managers
 {
@@ -16,6 +17,11 @@ namespace Game.Features.GameFlow.Managers
     [DefaultExecutionOrder(-1000)]
     public class GameManager : MonoBehaviour
     {
+        [Header("New game")]
+        [SerializeField] private int _newGameGold = 500;
+        [SerializeField] private string _newGameMapId = "SampleScene";
+        [SerializeField] private string _newGameSpawnId = "PlayerStart";
+
         private const float PostLoadDelaySeconds = 0.1f;
 
         public static GameManager Instance { get; private set; }
@@ -43,7 +49,16 @@ namespace Game.Features.GameFlow.Managers
 
         private void Start()
         {
-            _gameLoadService?.TryRestoreFromSave(Player.Instance, InventoryController.Instance);
+            bool hasSave = _gameLoadService.TryRestoreFromSave(Player.Instance, InventoryController.Instance);
+
+            if(hasSave)
+            {
+                LoadScene();
+            }
+            else
+            {
+                StartNewGame();
+            }
         }
 
         private void OnEnable()
@@ -67,6 +82,28 @@ namespace Game.Features.GameFlow.Managers
             SaveableBehaviour.Unregistered -= Unregister;
             SaveableBehaviour.SceneSaveRequested -= SaveSceneState;
             Player.SaveRequested -= OnPlayerSaveRequested;
+        }
+
+        public void StartNewGame()
+        {
+            Player player = Player.Instance;
+            if (player == null)
+            {
+                Debug.LogWarning("StartNewGame: Player.Instance is null.");
+                return;
+            }
+            player.Gold = _newGameGold;
+            player.CurrentMapId = _newGameMapId;
+
+            StartCoroutine(SceneTransitionService.LoadSceneWithTransition(
+                _newGameMapId, PlaceNewPlayerAfterLoad));
+        }
+
+        private IEnumerator PlaceNewPlayerAfterLoad()
+        {
+            yield return RestoreSceneStateAfterLoad();
+            TeleportManager.MovePlayerToSpawn(_newGameSpawnId);
+            SaveGame();               
         }
 
         public bool SaveGame()
@@ -122,6 +159,19 @@ namespace Game.Features.GameFlow.Managers
         {
             _sceneStateService?.SaveSceneState(scene.name);
             _sceneStateService?.ClearRegistry(scene.name);
+        }
+
+        private void OnApplicationQuit()
+        {
+            if (Instance != this) return;
+            _sceneStateService?.SaveSceneState(SceneManager.GetActiveScene().name);
+            SaveGame();
+        }
+
+        private void OnApplicationPause(bool paused)   // cho mobile
+        {
+            if (paused && Instance == this)
+                SaveGame();
         }
     }
 }

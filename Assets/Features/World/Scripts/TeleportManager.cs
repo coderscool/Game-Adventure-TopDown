@@ -60,7 +60,7 @@ namespace Game.Features.World
                 if (spawn.SpawnId != spawnId)
                     continue;
 
-                player.transform.position = spawn.transform.position;
+                player.WarpTo(spawn.transform.position);
                 return;
             }
 

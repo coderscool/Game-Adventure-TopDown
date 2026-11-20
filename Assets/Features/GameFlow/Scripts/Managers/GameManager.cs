@@ -19,7 +19,7 @@ namespace Game.Features.GameFlow.Managers
     {
         [Header("New game")]
         [SerializeField] private int _newGameGold = 500;
-        [SerializeField] private string _newGameMapId = "SampleScene";
+        [SerializeField] private string _newGameMapId = "NoviceMap";
         [SerializeField] private string _newGameSpawnId = "PlayerStart";
 
         private const float PostLoadDelaySeconds = 0.1f;
@@ -51,14 +51,22 @@ namespace Game.Features.GameFlow.Managers
         {
             bool hasSave = _gameLoadService.TryRestoreFromSave(Player.Instance, InventoryController.Instance);
 
-            if(hasSave)
-            {
-                LoadScene();
-            }
-            else
+            if (!hasSave)
             {
                 StartNewGame();
+                return;
             }
+
+            Player player = Player.Instance;
+            if (player != null && !Application.CanStreamedLevelBeLoaded(player.CurrentMapId))
+            {
+                // e.g. the saved map was renamed/removed: do not get stuck, go to the start spawn.
+                Debug.LogWarning($"Saved map '{player.CurrentMapId}' is not in Build Settings; using the start map.");
+                EnterStartMap(player);
+                return;
+            }
+
+            LoadScene();
         }
 
         private void OnEnable()
@@ -93,6 +101,12 @@ namespace Game.Features.GameFlow.Managers
                 return;
             }
             player.Gold = _newGameGold;
+            EnterStartMap(player);
+        }
+
+        /// <summary>Loads the start map behind the loading screen and puts the player on the start spawn.</summary>
+        private void EnterStartMap(Player player)
+        {
             player.CurrentMapId = _newGameMapId;
 
             StartCoroutine(SceneTransitionService.LoadSceneWithTransition(
@@ -103,7 +117,11 @@ namespace Game.Features.GameFlow.Managers
         {
             yield return RestoreSceneStateAfterLoad();
             TeleportManager.MovePlayerToSpawn(_newGameSpawnId);
-            SaveGame();               
+
+            // One frame so the camera cut is applied while the loading screen is still showing.
+            yield return null;
+
+            SaveGame();
         }
 
         public bool SaveGame()

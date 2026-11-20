@@ -12,6 +12,9 @@ namespace Game.Features.Character.Systems
         /// <summary>Raised by SavePlayer(); whoever owns persistence (GameManager) handles it.</summary>
         public static event Action SaveRequested;
 
+        /// <summary>Raised after the player is moved instantly (teleport / spawn), so the camera can cut.</summary>
+        public static event Action Warped;
+
         [FormerlySerializedAs("gold")] [SerializeField] private int _gold = 100;
         [FormerlySerializedAs("exp")] [SerializeField] private int _exp;
         [FormerlySerializedAs("exps")] [SerializeField] private int _exps;
@@ -24,7 +27,7 @@ namespace Game.Features.Character.Systems
         [FormerlySerializedAs("spirit")] [SerializeField] private float _spirit = 100f;
 
         [FormerlySerializedAs("currentMapId")]
-        [SerializeField] private string _currentMapId = "SampleScene";
+        [SerializeField] private string _currentMapId = "NoviceMap";
 
         public int Gold { get => _gold; set => _gold = value; }
         public int Exp { get => _exp; set => _exp = value; }
@@ -58,6 +61,14 @@ namespace Game.Features.Character.Systems
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        /// <summary>Moves the player instantly and notifies listeners (e.g. the camera).</summary>
+        public void WarpTo(Vector3 position)
+        {
+            transform.position = position;
+            Physics2D.SyncTransforms();
+            Warped?.Invoke();
         }
 
         // Bound to a UnityEvent in the GameStart scene - keep the name.

@@ -1,0 +1,21 @@
+{
+    "name": "Game.Shop",
+    "rootNamespace": "",
+    "references": [
+        "Game.Character",
+        "Game.Inventory",
+        "Game.Items",
+        "Game.Shared",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -22,6 +22,9 @@ namespace Game.Features.GameFlow.Managers
         [SerializeField] private string _newGameMapId = "NoviceMap";
         [SerializeField] private string _newGameSpawnId = "PlayerStart";
 
+        [Header("Boot")]
+        [SerializeField] private string _bootSceneName = "GameStart";
+
         private const float PostLoadDelaySeconds = 0.1f;
 
         public static GameManager Instance { get; private set; }
@@ -29,6 +32,7 @@ namespace Game.Features.GameFlow.Managers
         private SaveGameService _saveGameService;
         private GameLoadService _gameLoadService;
         private SceneStateService _sceneStateService;
+        private bool _autoSaveEnabled = true;
 
         private void Awake()
         {
@@ -49,6 +53,12 @@ namespace Game.Features.GameFlow.Managers
 
         private void Start()
         {
+            if (SceneManager.GetActiveScene().name != _bootSceneName)
+            {
+                StartInCurrentScene();
+                return;
+            }
+
             bool hasSave = _gameLoadService.TryRestoreFromSave(Player.Instance, InventoryController.Instance);
 
             if (!hasSave)
@@ -179,16 +189,37 @@ namespace Game.Features.GameFlow.Managers
             _sceneStateService?.ClearRegistry(scene.name);
         }
 
+        // Dev/test: Play directly from any map scene (no GameStart, no loading screen).
+        private void StartInCurrentScene()
+        {
+            Player player = Player.Instance;
+            if (player == null)
+            {
+                Debug.LogWarning("StartInCurrentScene: no Player found.");
+                return;
+            }
+
+            _autoSaveEnabled = false;   // keep the real save untouched while testing one scene
+
+            bool restored = _gameLoadService.TryRestoreFromSave(player, InventoryController.Instance);
+            if (!restored) player.Gold = _newGameGold;
+
+            Scene scene = SceneManager.GetActiveScene();
+            player.CurrentMapId = scene.name;
+            _sceneStateService.LoadSceneState(scene.name);
+            TeleportManager.MovePlayerToSpawn(_newGameSpawnId);
+        }
+
         private void OnApplicationQuit()
         {
-            if (Instance != this) return;
+            if (Instance != this || !_autoSaveEnabled) return;
             _sceneStateService?.SaveSceneState(SceneManager.GetActiveScene().name);
             SaveGame();
         }
 
         private void OnApplicationPause(bool paused)   // cho mobile
         {
-            if (paused && Instance == this)
+            if (paused && Instance == this && _autoSaveEnabled)
                 SaveGame();
         }
     }

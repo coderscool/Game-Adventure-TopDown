@@ -13,17 +13,48 @@ namespace Game.Features.Inventory.Services
             _itemFactory = itemFactory;
         }
 
-        public void AddItem(Slot[] slots, ItemData data, int addAmount)
+        /// <summary>Adds the item. Returns false when it did not all fit (the part that fit is still added).</summary>
+        public bool AddItem(Slot[] slots, ItemData data, int addAmount)
         {
             if (slots == null || data == null || addAmount <= 0)
-                return;
+                return false;
 
             int remaining = FillExistingStacks(slots, data, addAmount);
             if (remaining > 0)
                 remaining = FillEmptySlots(slots, data, remaining);
 
             if (remaining > 0)
+            {
                 Debug.Log("Inventory full");
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>True when the whole amount would fit, without changing anything.</summary>
+        public bool CanFit(Slot[] slots, ItemData data, int amount)
+        {
+            if (slots == null || data == null || amount <= 0)
+                return false;
+
+            int space = 0;
+
+            foreach (Slot slot in slots)
+            {
+                if (slot == null)
+                    continue;
+
+                if (slot.CanStack(data))
+                    space += data.MaxStack - slot.Amount;
+                else if (slot.IsEmpty())
+                    space += data.MaxStack;
+
+                if (space >= amount)
+                    return true;
+            }
+
+            return false;
         }
 
         public void DropItem(ItemUI itemUI, int amount)

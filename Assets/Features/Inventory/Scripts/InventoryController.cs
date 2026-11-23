@@ -53,9 +53,16 @@ namespace Game.Features.Inventory
                 _restoreService.Restore(_slots, inventory, ItemDatabase.Instance);
         }
 
-        public void AddItem(ItemData data, int addAmount)
+        /// <summary>Returns false when the item did not fully fit.</summary>
+        public bool AddItem(ItemData data, int addAmount)
         {
-            _mutationService.AddItem(_slots, data, addAmount);
+            return _mutationService.AddItem(_slots, data, addAmount);
+        }
+
+        /// <summary>Checks the whole amount would fit, without adding anything.</summary>
+        public bool CanAddItem(ItemData data, int amount)
+        {
+            return _mutationService.CanFit(_slots, data, amount);
         }
 
         public void DropItem(ItemUI itemUI, int amount)

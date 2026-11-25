@@ -31,7 +31,13 @@ namespace Game.Features.GameFlow.Systems
 
             Transform root = instance.transform;
             while (root.childCount > 0)
-                root.GetChild(0).SetParent(null, true);
+            {
+                Transform child = root.GetChild(0);
+                child.SetParent(null, true);
+
+                // Some children (e.g. EventSystem) have no persistence script of their own.
+                Object.DontDestroyOnLoad(child.gameObject);
+            }
 
             Object.Destroy(holder);
         }

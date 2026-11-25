@@ -6,6 +6,7 @@ namespace Game.Features.UI
     {
         private const KeyCode InventoryKey = KeyCode.I;
         private const KeyCode SystemKey = KeyCode.O;
+        private const KeyCode MapKey = KeyCode.M;
 
         private void Update()
         {
@@ -17,6 +18,9 @@ namespace Game.Features.UI
 
             if (Input.GetKeyDown(SystemKey))
                 UIManager.Instance.ToggleSystem();
+
+            if (Input.GetKeyDown(MapKey))
+                UIManager.Instance.ToggleMap();
         }
     }
 }

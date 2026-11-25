@@ -13,6 +13,8 @@ namespace Game.Features.UI
         [FormerlySerializedAs("systemCanvas")]
         [SerializeField] private GameObject _systemCanvas;
 
+        [SerializeField] private GameObject _mapCanvas;
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -30,6 +32,9 @@ namespace Game.Features.UI
         {
             _inventoryCanvas.SetActive(false);
             _systemCanvas.SetActive(false);
+
+            if (_mapCanvas != null)
+                _mapCanvas.SetActive(false);
         }
 
         public void ToggleInventory()
@@ -40,6 +45,18 @@ namespace Game.Features.UI
         public void ToggleSystem()
         {
             Toggle(_systemCanvas);
+        }
+
+        // Bound to the map button's UnityEvent and the M key - keep the name.
+        public void ToggleMap()
+        {
+            if (_mapCanvas == null)
+            {
+                Debug.LogWarning("UIManager: Map Canvas is not assigned.");
+                return;
+            }
+
+            Toggle(_mapCanvas);
         }
 
         private void Toggle(GameObject canvas)

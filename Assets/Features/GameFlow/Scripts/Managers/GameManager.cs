@@ -33,6 +33,7 @@ namespace Game.Features.GameFlow.Managers
         private GameLoadService _gameLoadService;
         private SceneStateService _sceneStateService;
         private bool _autoSaveEnabled = true;
+        private bool _isTraveling;
 
         private void Awake()
         {
@@ -153,6 +154,41 @@ namespace Game.Features.GameFlow.Managers
             StartCoroutine(SceneTransitionService.LoadSceneWithTransition(
                 player.CurrentMapId,
                 RestoreSceneStateAfterLoad));
+        }
+
+        /// <summary>Fast travel: loading screen, then the player is placed on the given spawn point.</summary>
+        public void TravelTo(string sceneName, string spawnId)
+        {
+            if (_isTraveling || Player.Instance == null)
+                return;
+
+            if (!Application.CanStreamedLevelBeLoaded(sceneName))
+            {
+                Debug.LogWarning($"TravelTo: scene '{sceneName}' is not in Build Settings.");
+                return;
+            }
+
+            StartCoroutine(TravelRoutine(sceneName, spawnId));
+        }
+
+        private IEnumerator TravelRoutine(string sceneName, string spawnId)
+        {
+            _isTraveling = true;
+            Player.Instance.CurrentMapId = sceneName;
+
+            yield return SceneTransitionService.LoadSceneWithTransition(
+                sceneName, () => PlaceAfterTravel(spawnId));
+
+            _isTraveling = false;
+        }
+
+        private IEnumerator PlaceAfterTravel(string spawnId)
+        {
+            yield return RestoreSceneStateAfterLoad();
+            TeleportManager.MovePlayerToSpawn(spawnId);
+
+            // One frame so the camera cut is applied while the loading screen is still showing.
+            yield return null;
         }
 
         private void OnPlayerSaveRequested()

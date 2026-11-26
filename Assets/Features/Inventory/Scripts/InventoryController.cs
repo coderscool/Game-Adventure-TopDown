@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Game.Features.Inventory.Data;
@@ -18,6 +19,9 @@ namespace Game.Features.Inventory
         [FormerlySerializedAs("slotPrefab")] [SerializeField] private GameObject _slotPrefab;
         [FormerlySerializedAs("itemUIPrefab")] [SerializeField] private GameObject _itemUiPrefab;
         [FormerlySerializedAs("slotCount")] [SerializeField] private int _slotCount = 30;
+
+        /// <summary>Raised whenever items are added to or removed from the inventory.</summary>
+        public event Action Changed;
 
         private Slot[] _slots;
         private InventoryRestoreService _restoreService;
@@ -51,12 +55,16 @@ namespace Game.Features.Inventory
 
             if (inventory != null && inventory.Length > 0)
                 _restoreService.Restore(_slots, inventory, ItemDatabase.Instance);
+
+            Changed?.Invoke();
         }
 
         /// <summary>Returns false when the item did not fully fit.</summary>
         public bool AddItem(ItemData data, int addAmount)
         {
-            return _mutationService.AddItem(_slots, data, addAmount);
+            bool allFit = _mutationService.AddItem(_slots, data, addAmount);
+            Changed?.Invoke();
+            return allFit;
         }
 
         /// <summary>Checks the whole amount would fit, without adding anything.</summary>
@@ -65,9 +73,31 @@ namespace Game.Features.Inventory
             return _mutationService.CanFit(_slots, data, amount);
         }
 
+        /// <summary>True when the player owns at least one of this item.</summary>
+        public bool HasItem(ItemData data)
+        {
+            return _mutationService.Contains(_slots, data);
+        }
+
+        /// <summary>Total amount of this item the player owns.</summary>
+        public int CountOf(ItemData data)
+        {
+            return _mutationService.Count(_slots, data);
+        }
+
+        /// <summary>Removes the amount. Returns false, and removes nothing, if the player has less.</summary>
+        public bool RemoveItem(ItemData data, int amount)
+        {
+            bool removed = _mutationService.Remove(_slots, data, amount);
+            if (removed)
+                Changed?.Invoke();
+            return removed;
+        }
+
         public void DropItem(ItemUI itemUI, int amount)
         {
             _mutationService.DropItem(itemUI, amount);
+            Changed?.Invoke();
         }
 
         private void CreateSlots()

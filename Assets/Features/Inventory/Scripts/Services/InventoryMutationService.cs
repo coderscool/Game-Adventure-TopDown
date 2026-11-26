@@ -57,6 +57,70 @@ namespace Game.Features.Inventory.Services
             return false;
         }
 
+        /// <summary>True when at least one stack of this item is in the slots.</summary>
+        public bool Contains(Slot[] slots, ItemData data)
+        {
+            if (slots == null || data == null)
+                return false;
+
+            foreach (Slot slot in slots)
+            {
+                if (slot != null && !slot.IsEmpty() && slot.CurrentItem.Data.ItemId == data.ItemId)
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>Total amount of this item across all slots.</summary>
+        public int Count(Slot[] slots, ItemData data)
+        {
+            if (slots == null || data == null)
+                return 0;
+
+            int total = 0;
+
+            foreach (Slot slot in slots)
+            {
+                if (slot != null && !slot.IsEmpty() && slot.CurrentItem.Data.ItemId == data.ItemId)
+                    total += slot.Amount;
+            }
+
+            return total;
+        }
+
+        /// <summary>Removes the amount from the slots (last slots first). Returns false, and removes nothing, if there is not enough.</summary>
+        public bool Remove(Slot[] slots, ItemData data, int amount)
+        {
+            if (slots == null || data == null || amount <= 0 || Count(slots, data) < amount)
+                return false;
+
+            int remaining = amount;
+
+            for (int i = slots.Length - 1; i >= 0 && remaining > 0; i--)
+            {
+                Slot slot = slots[i];
+                if (slot == null || slot.IsEmpty() || slot.CurrentItem.Data.ItemId != data.ItemId)
+                    continue;
+
+                int taken = Mathf.Min(slot.Amount, remaining);
+                slot.Amount -= taken;
+                remaining -= taken;
+
+                if (slot.Amount <= 0)
+                {
+                    Object.Destroy(slot.CurrentItem.gameObject);
+                    slot.Clear();
+                }
+                else
+                {
+                    slot.CurrentItem.SetAmount(slot.Amount);
+                }
+            }
+
+            return true;
+        }
+
         public void DropItem(ItemUI itemUI, int amount)
         {
             if (itemUI == null || amount <= 0)

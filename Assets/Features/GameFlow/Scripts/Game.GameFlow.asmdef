@@ -5,6 +5,7 @@
         "Game.Character",
         "Game.Inventory",
         "Game.Items",
+        "Game.Quest",
         "Game.Save",
         "Game.World",
         "Cinemachine",

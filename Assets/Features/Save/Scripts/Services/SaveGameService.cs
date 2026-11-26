@@ -2,6 +2,7 @@ using UnityEngine;
 using Game.Features.Character.Model;
 using Game.Features.Inventory.Data;
 using Game.Features.Inventory.Interfaces;
+using Game.Features.Quest.Interfaces;
 using Game.Features.Save.Data;
 using Game.Features.Save.Interfaces;
 
@@ -16,7 +17,7 @@ namespace Game.Features.Save.Services
             _storage = storage;
         }
 
-        public bool TrySave(IPlayerState player, IInventoryState inventory)
+        public bool TrySave(IPlayerState player, IInventoryState inventory, IQuestState quests)
         {
             if (player == null)
             {
@@ -27,7 +28,8 @@ namespace Game.Features.Save.Services
             var data = new GameData
             {
                 player = new PlayerData(player),
-                inventory = inventory != null ? inventory.CaptureInventory() : new InventoryItemData[0]
+                inventory = inventory != null ? inventory.CaptureInventory() : new InventoryItemData[0],
+                quests = quests != null ? quests.CaptureQuests() : null
             };
 
             return _storage.TrySave(data);

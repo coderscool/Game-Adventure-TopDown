@@ -2,6 +2,7 @@ using UnityEngine;
 using Game.Features.Character.Model;
 using Game.Features.Inventory.Data;
 using Game.Features.Inventory.Interfaces;
+using Game.Features.Quest.Interfaces;
 using Game.Features.Save.Data;
 using Game.Features.Save.Interfaces;
 
@@ -17,18 +18,20 @@ namespace Game.Features.Save.Services
         }
 
         /// <summary>Restores player and inventory from the save file. Returns false when there is no usable save.</summary>
-        public bool TryRestoreFromSave(IPlayerState player, IInventoryState inventory)
+        public bool TryRestoreFromSave(IPlayerState player, IInventoryState inventory, IQuestState quests)
         {
             if (!_storage.TryLoad(out GameData data))
             {
                 Debug.LogWarning("No save file or invalid data; using scene defaults.");
                 // Still build the (empty) inventory so a new game can receive items.
                 RestoreInventory(inventory, null);
+                quests?.RestoreQuests(null);
                 return false;
             }
 
             RestorePlayer(player, data.player);
             RestoreInventory(inventory, data.inventory);
+            quests?.RestoreQuests(data.quests);
             return true;
         }
 

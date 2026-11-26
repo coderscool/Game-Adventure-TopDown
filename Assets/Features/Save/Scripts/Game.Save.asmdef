@@ -4,7 +4,8 @@
     "references": [
         "Game.Character",
         "Game.Inventory",
-        "Game.Items"
+        "Game.Items",
+        "Game.Quest"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -4,6 +4,8 @@
     "references": [
         "Game.Character",
         "Game.GameFlow",
+        "Game.Inventory",
+        "Game.Items",
         "Game.UI",
         "Unity.TextMeshPro",
         "UnityEngine.UI"

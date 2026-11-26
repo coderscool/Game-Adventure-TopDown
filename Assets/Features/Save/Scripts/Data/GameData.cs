@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Features.Character.Model;
 using Game.Features.Inventory.Data;
+using Game.Features.Quest.Model;
 
 namespace Game.Features.Save.Data
 {
@@ -9,5 +10,6 @@ namespace Game.Features.Save.Data
     {
         public PlayerData player;
         public InventoryItemData[] inventory;
+        public QuestProgressData[] quests;
     }
 }

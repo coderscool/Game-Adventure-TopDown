@@ -14,6 +14,7 @@ namespace Game.Features.UI
         [SerializeField] private GameObject _systemCanvas;
 
         [SerializeField] private GameObject _mapCanvas;
+        [SerializeField] private GameObject _questCanvas;
 
         private void Awake()
         {
@@ -35,6 +36,9 @@ namespace Game.Features.UI
 
             if (_mapCanvas != null)
                 _mapCanvas.SetActive(false);
+
+            if (_questCanvas != null)
+                _questCanvas.SetActive(false);
         }
 
         public void ToggleInventory()
@@ -45,6 +49,18 @@ namespace Game.Features.UI
         public void ToggleSystem()
         {
             Toggle(_systemCanvas);
+        }
+
+        // Bound to the quest button's UnityEvent and the J key - keep the name.
+        public void ToggleQuest()
+        {
+            if (_questCanvas == null)
+            {
+                Debug.LogWarning("UIManager: Quest Canvas is not assigned.");
+                return;
+            }
+
+            Toggle(_questCanvas);
         }
 
         // Bound to the map button's UnityEvent and the M key - keep the name.

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Game.Features.Character.Systems;
 using Game.Features.Inventory;
+using Game.Features.Quest.Systems;
 using Game.Features.Save;
 using Game.Features.Save.Interfaces;
 using Game.Features.Save.Services;
@@ -60,7 +61,7 @@ namespace Game.Features.GameFlow.Managers
                 return;
             }
 
-            bool hasSave = _gameLoadService.TryRestoreFromSave(Player.Instance, InventoryController.Instance);
+            bool hasSave = _gameLoadService.TryRestoreFromSave(Player.Instance, InventoryController.Instance, QuestManager.Instance);
 
             if (!hasSave)
             {
@@ -138,7 +139,7 @@ namespace Game.Features.GameFlow.Managers
         public bool SaveGame()
         {
             return _saveGameService != null
-                && _saveGameService.TrySave(Player.Instance, InventoryController.Instance);
+                && _saveGameService.TrySave(Player.Instance, InventoryController.Instance, QuestManager.Instance);
         }
 
         /// <summary>Loads the map stored in the player's save/state, with the loading screen.</summary>
@@ -237,7 +238,7 @@ namespace Game.Features.GameFlow.Managers
 
             _autoSaveEnabled = false;   // keep the real save untouched while testing one scene
 
-            bool restored = _gameLoadService.TryRestoreFromSave(player, InventoryController.Instance);
+            bool restored = _gameLoadService.TryRestoreFromSave(player, InventoryController.Instance, QuestManager.Instance);
             if (!restored) player.Gold = _newGameGold;
 
             Scene scene = SceneManager.GetActiveScene();

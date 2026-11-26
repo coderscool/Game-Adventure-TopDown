@@ -4,6 +4,7 @@
     {
         CollectItem,
         TalkToNpc,
-        ReachMap
+        ReachMap,
+        KillEnemy
     }
 }

@@ -203,6 +203,12 @@ namespace Game.Features.Quest.Systems
         }
 
         /// <summary>The player arrived in a map: starts quests tied to it and counts "reach map" goals.</summary>
+        /// <summary>Called by combat when an enemy dies. Counts towards "kill" goals with the same enemy id.</summary>
+        public void ReportEnemyKilled(string enemyId)
+        {
+            Report(QuestObjectiveType.KillEnemy, enemyId);
+        }
+
         public void ReportMapEntered(string mapId)
         {
             if (string.IsNullOrEmpty(mapId))

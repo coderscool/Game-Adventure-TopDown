@@ -1,0 +1,580 @@
+fileFormatVersion: 2
+guid: a5121e55710cbab48becbeac353d52b4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8328038347188240365
+    second: Golem_Laser_0
+  - first:
+      213: -4340715350170553201
+    second: Golem_Laser_1
+  - first:
+      213: -8345053766574529850
+    second: Golem_Laser_2
+  - first:
+      213: 2776222792378776624
+    second: Golem_Laser_3
+  - first:
+      213: 1664271420942244160
+    second: Golem_Laser_4
+  - first:
+      213: 3558564002979854247
+    second: Golem_Laser_5
+  - first:
+      213: 3886702275319959146
+    second: Golem_Laser_6
+  - first:
+      213: 5299806491665511263
+    second: Golem_Laser_7
+  - first:
+      213: -8910618968480497838
+    second: Golem_Laser_8
+  - first:
+      213: -1610278909290301598
+    second: Golem_Laser_9
+  - first:
+      213: -2742191466177913707
+    second: Golem_Laser_10
+  - first:
+      213: -5839178468767434755
+    second: Golem_Laser_11
+  - first:
+      213: -6293262342464669387
+    second: Golem_Laser_12
+  - first:
+      213: 2985242823145684720
+    second: Golem_Laser_13
+  - first:
+      213: 5561365967302140764
+    second: Golem_Laser_14
+  - first:
+      213: -8407989663598460916
+    second: Golem_Laser_15
+  - first:
+      213: -3299068866922866020
+    second: Golem_Laser_16
+  - first:
+      213: -8325906157560458001
+    second: Golem_Laser_17
+  - first:
+      213: -5572215201112043730
+    second: Golem_Laser_18
+  - first:
+      213: 1938582968256895232
+    second: Golem_Laser_19
+  - first:
+      213: -7420802328290427213
+    second: Golem_Laser_20
+  - first:
+      213: 7196512997919757751
+    second: Golem_Laser_21
+  - first:
+      213: 8088113331062719202
+    second: Golem_Laser_22
+  - first:
+      213: -8340398009097372911
+    second: Golem_Laser_23
+  - first:
+      213: 5693797478994264872
+    second: Golem_Laser_24
+  - first:
+      213: 8728688171767302992
+    second: Golem_Laser_25
+  - first:
+      213: -7682162158995540215
+    second: Golem_Laser_26
+  - first:
+      213: -7376457036308608571
+    second: Golem_Laser_27
+  - first:
+      213: 3073659380378386270
+    second: Golem_Laser_28
+  - first:
+      213: -3538869636849509315
+    second: Golem_Laser_29
+  - first:
+      213: 8094346704548998498
+    second: Golem_Laser_30
+  - first:
+      213: 8795261252571676874
+    second: Golem_Laser_31
+  - first:
+      213: 2675893502385722691
+    second: Golem_Laser_32
+  - first:
+      213: -6761505081232202017
+    second: Golem_Laser_33
+  - first:
+      213: 5885222406217420713
+    second: Golem_Laser_34
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GolemLaser_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1400
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bb61b72e14ecfb4ca695bddc6792969
+      internalID: 1793066410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1300
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a92d082e8a03414c8f3e67119a95a23
+      internalID: 170205938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1200
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9af05fb5f6f36784e8cbea423f121521
+      internalID: -328278145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1100
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16c54c8ce80ec4f4190624916696010f
+      internalID: -410127368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1000
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 717df99393c7a8e409bcb653b0c5ddfa
+      internalID: 708436665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 900
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 470e83d6be34a594da94e53ddead67a8
+      internalID: -587276805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 800
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df34b2e20a1dbb43a6fa3ebeddc7a3e
+      internalID: 58371398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 700
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b007c60aaae258e48bd01f3bfd508a6b
+      internalID: -1728190246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81a8c58175e84834c9470b5770ab85ca
+      internalID: -1644862668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 500
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fecb6601b5a9c9d4b9472870b967db17
+      internalID: 1209406012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ccac74cda9153e47aceeb8620fda7fb
+      internalID: -21995860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c02479d4efc69c4ebd7bd0128f887e5
+      internalID: -1512852512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8023ec27045bfe84a8afc57c5224b2f4
+      internalID: 1764818623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db9e12c06b2a53946ba0fe6f43d0e8e3
+      internalID: 1496874597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GolemLaser_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.17333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6639d55fff09e7c4f84b87d40a8d4c3b
+      internalID: 1897891786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4d0efc1896d7e764ba40c3edfae7e852
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GolemLaser_0: 1793066410
+      GolemLaser_1: 170205938
+      GolemLaser_10: -21995860
+      GolemLaser_11: -1512852512
+      GolemLaser_12: 1764818623
+      GolemLaser_13: 1496874597
+      GolemLaser_14: 1897891786
+      GolemLaser_2: -328278145
+      GolemLaser_3: -410127368
+      GolemLaser_4: 708436665
+      GolemLaser_5: -587276805
+      GolemLaser_6: 58371398
+      GolemLaser_7: -1728190246
+      GolemLaser_8: -1644862668
+      GolemLaser_9: 1209406012
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

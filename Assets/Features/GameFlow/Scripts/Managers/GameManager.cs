@@ -20,6 +20,9 @@ namespace Game.Features.GameFlow.Managers
     {
         [Header("New game")]
         [SerializeField] private int _newGameGold = 500;
+        [Tooltip("Percent of gold lost when the player dies.")]
+        [Range(0, 100)]
+        [SerializeField] private int _deathGoldLossPercent = 10;
         [SerializeField] private string _newGameMapId = "NoviceMap";
         [SerializeField] private string _newGameSpawnId = "PlayerStart";
 
@@ -155,6 +158,20 @@ namespace Game.Features.GameFlow.Managers
             StartCoroutine(SceneTransitionService.LoadSceneWithTransition(
                 player.CurrentMapId,
                 RestoreSceneStateAfterLoad));
+        }
+
+        /// <summary>After dying: refill health, lose a little gold, and go back to the start map.</summary>
+        public void RespawnPlayer()
+        {
+            Player player = Player.Instance;
+            if (player == null)
+                return;
+
+            player.Hp = player.MaxHp;
+            player.Gold -= Mathf.Max(1, Mathf.RoundToInt(player.Gold * _deathGoldLossPercent / 100f));
+            _isTraveling = false;
+
+            StartCoroutine(TravelRoutine(_newGameMapId, _newGameSpawnId));
         }
 
         /// <summary>Fast travel: loading screen, then the player is placed on the given spawn point.</summary>

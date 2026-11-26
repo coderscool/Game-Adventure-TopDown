@@ -13,7 +13,7 @@ namespace Game.Features.Quest.Data
         [Tooltip("CollectItem: the item to collect. Other types: leave empty.")]
         [SerializeField] private ItemData _item;
 
-        [Tooltip("TalkToNpc: the NPC id. ReachMap: the scene name.")]
+        [Tooltip("TalkToNpc: the NPC id. ReachMap: the scene name. KillEnemy: the enemy id (EnemyData).")]
         [SerializeField] private string _targetId;
 
         [Min(1)]
@@ -44,6 +44,8 @@ namespace Game.Features.Quest.Data
                     return "Nói chuyện với " + _targetId;
                 case QuestObjectiveType.ReachMap:
                     return "Đến " + _targetId;
+                case QuestObjectiveType.KillEnemy:
+                    return "Hạ " + _targetId;
                 default:
                     return string.Empty;
             }

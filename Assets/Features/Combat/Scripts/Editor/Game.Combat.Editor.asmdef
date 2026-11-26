@@ -1,0 +1,21 @@
+﻿{
+    "name": "Game.Combat.Editor",
+    "rootNamespace": "",
+    "references": [
+        "Game.Combat",
+        "Game.Character",
+        "Game.Save",
+        "Unity.2D.Sprite.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

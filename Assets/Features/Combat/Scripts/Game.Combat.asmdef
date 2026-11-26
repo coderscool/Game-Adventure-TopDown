@@ -1,0 +1,24 @@
+﻿{
+    "name": "Game.Combat",
+    "rootNamespace": "",
+    "references": [
+        "Game.Character",
+        "Game.GameFlow",
+        "Game.Inventory",
+        "Game.Items",
+        "Game.Quest",
+        "Game.Save",
+        "Game.Shared",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

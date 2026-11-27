@@ -15,6 +15,10 @@ namespace Game.Features.Combat.Systems
         [Tooltip("Optional. Overrides the data on the prefab, so one prefab can be many kinds of enemy.")]
         [SerializeField] private EnemyData _dataOverride;
 
+        [Header("Area (use this OR the path below)")]
+        [Tooltip("A trigger collider (Box or Polygon) that marks the area. Enemies appear inside it and never leave it.")]
+        [SerializeField] private Collider2D _zone;
+
         [Header("Path")]
         [Tooltip("Leave empty to use the child objects of this spawner, in order.")]
         [SerializeField] private Transform[] _pathPoints;
@@ -51,7 +55,7 @@ namespace Game.Features.Combat.Systems
             if (playerDistance > _activeDistance)
                 return;
 
-            Vector2 point = RandomPathPoint();
+            Vector2 point = _zone != null ? RandomZonePoint() : RandomPathPoint();
 
             if (Vector2.Distance(point, player.transform.position) < _minPlayerDistance)
             {
@@ -70,6 +74,9 @@ namespace Game.Features.Combat.Systems
 
             if (_dataOverride != null)
                 enemy.Initialize(_dataOverride);
+
+            if (_zone != null)
+                enemy.SetZone(_zone);
 
             _alive.Add(enemy);
             enemy.Defeated += OnEnemyDefeated;
@@ -106,6 +113,23 @@ namespace Game.Features.Combat.Systems
             return points;
         }
 
+        private Vector2 RandomZonePoint()
+        {
+            Bounds bounds = _zone.bounds;
+
+            for (int i = 0; i < 30; i++)
+            {
+                var point = new Vector2(
+                    Random.Range(bounds.min.x, bounds.max.x),
+                    Random.Range(bounds.min.y, bounds.max.y));
+
+                if (_zone.OverlapPoint(point))
+                    return point;
+            }
+
+            return bounds.center;
+        }
+
         private Vector2 RandomPathPoint()
         {
             List<Vector2> path = GetPath();
@@ -122,6 +146,13 @@ namespace Game.Features.Combat.Systems
 
         private void OnDrawGizmos()
         {
+            if (_zone != null)
+            {
+                Gizmos.color = new Color(1f, 0.3f, 0.3f, 0.9f);
+                Gizmos.DrawWireCube(_zone.bounds.center, _zone.bounds.size);
+                return;
+            }
+
             List<Vector2> path = GetPath();
             Gizmos.color = new Color(1f, 0.3f, 0.3f, 0.9f);
 

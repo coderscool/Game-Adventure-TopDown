@@ -27,6 +27,14 @@ namespace Game.Features.Combat.Systems
 
         [SerializeField] private EnemyData _data;
 
+        [Header("Area (optional)")]
+        [Tooltip("The enemy stays inside this area: it wanders only here, never chases out of it, and walks back when pulled out. Leave empty for no limit.")]
+        [SerializeField] private Collider2D _zone;
+        [Tooltip("The enemy gives up when the player is farther than this from the area.")]
+        [SerializeField] private float _playerLeashMargin = 2f;
+        [Tooltip("The enemy walks back when it is farther than this outside the area.")]
+        [SerializeField] private float _selfLeashMargin = 0.5f;
+
         private Rigidbody2D _rigidbody;
         private Health _health;
         private SpriteFlasher _flasher;
@@ -40,6 +48,7 @@ namespace Game.Features.Combat.Systems
         private Vector2 _wanderDirection;
         private bool _isAttacking;
         private bool _isDead;
+        private bool _isReturning;
 
         protected Color Warning => WarningTint;
         protected EnemyData Data => _data;
@@ -71,6 +80,12 @@ namespace Game.Features.Combat.Systems
 
         /// <summary>Raised once when this enemy dies.</summary>
         public event Action<EnemyController> Defeated;
+
+        /// <summary>Called by a spawner so the enemy knows the area it belongs to.</summary>
+        public void SetZone(Collider2D zone)
+        {
+            _zone = zone;
+        }
 
         /// <summary>Called by a spawner right after the enemy is created.</summary>
         public void Initialize(EnemyData data)
@@ -132,6 +147,18 @@ namespace Game.Features.Combat.Systems
             if (_isDead || _data == null)
                 return;
 
+            if (_isReturning)
+            {
+                ReturnHome();
+                return;
+            }
+
+            if (_zone != null && !IsInZone(_rigidbody.position, _selfLeashMargin) && !_isAttacking)
+            {
+                StartReturning();
+                return;
+            }
+
             if (!FindTarget())
             {
                 Wander();
@@ -140,6 +167,16 @@ namespace Game.Features.Combat.Systems
 
             if (_isAttacking)
                 return;
+
+            // The player ran outside the area: stop chasing and stay inside.
+            if (_zone != null && !IsInZone(_targetTransform.position, _playerLeashMargin))
+            {
+                if (IsEngaged)
+                    Disengage();
+
+                Wander();
+                return;
+            }
 
             float distance = Vector2.Distance(_rigidbody.position, _targetTransform.position);
 
@@ -196,6 +233,38 @@ namespace Game.Features.Combat.Systems
             _moveVelocity = Vector2.zero;
         }
 
+        private bool IsInZone(Vector2 point, float margin)
+        {
+            if (_zone == null)
+                return true;
+
+            Vector2 closest = _zone.ClosestPoint(point);
+            return (closest - point).sqrMagnitude <= margin * margin;
+        }
+
+        private void StartReturning()
+        {
+            if (IsEngaged)
+                Disengage();
+
+            _isReturning = true;
+        }
+
+        private void ReturnHome()
+        {
+            Vector2 toHome = _home - _rigidbody.position;
+
+            if (toHome.magnitude < 0.4f)
+            {
+                _isReturning = false;
+                _moveVelocity = Vector2.zero;
+                _health.RestoreFull();
+                return;
+            }
+
+            _moveVelocity = toHome.normalized * (_data.MoveSpeed * SpeedMultiplier);
+        }
+
         private bool FindTarget()
         {
             if (_targetTransform == null)
@@ -224,6 +293,10 @@ namespace Game.Features.Combat.Systems
                     _wanderDirection = Vector2.zero;
                 else
                     _wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
+
+                // Inside an area, never pick a direction that walks out of it.
+                if (_zone != null && !IsInZone(_rigidbody.position + _wanderDirection * 1.5f, 0f))
+                    _wanderDirection = ((Vector2)_zone.bounds.center - _rigidbody.position).normalized;
             }
 
             _moveVelocity = _wanderDirection * (_data.MoveSpeed * 0.4f);
